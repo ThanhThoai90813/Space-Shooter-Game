@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Transform missileSpawnPosition;
     public float destroyTimes =5f;
 
+    public Transform muzzleSpawnPosition;
+
     private void Update()
     {
         PlayerMovement();
@@ -27,10 +29,21 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject gm = Instantiate(missile, missileSpawnPosition);
-            gm.transform.SetParent(null);
-            Destroy(gm, destroyTimes);   
+            SpawnMissile();
+            SpawnMuzzleFlash();
         }
+    }
+    void SpawnMissile()
+    {
+        GameObject gm = Instantiate(missile, missileSpawnPosition);
+        gm.transform.SetParent(null);
+        Destroy(gm, destroyTimes);
+    }
+    void SpawnMuzzleFlash()
+    {
+        GameObject muzzle = Instantiate(GameManager.instance.muzzleFlash, muzzleSpawnPosition);
+        muzzle.transform.SetParent(null);
+        Destroy(muzzle, destroyTimes);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

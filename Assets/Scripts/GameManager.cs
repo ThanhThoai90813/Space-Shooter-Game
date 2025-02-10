@@ -10,6 +10,12 @@ public class GameManager : MonoBehaviour
 
     [Header("Particle Effects")]
     public GameObject explosion;
+    public GameObject muzzleFlash;
+
+    [Header("Panels")]
+    public GameObject startMenu;
+    public GameObject pauseMenu;
+
 
     private void Awake()
     {
@@ -18,8 +24,19 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        startMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 0f;
         InvokeRepeating("InstantiateEnemy", 1f, 1f);
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame(true);
+        }
     }
 
     void InstantiateEnemy()
@@ -29,5 +46,29 @@ public class GameManager : MonoBehaviour
         Destroy(enemy, enemyDestroyTime);
     }
 
+    public void StartButtion()
+    {
+        startMenu.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void PauseGame(bool isPaused)
+    {
+        if (isPaused == true)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+        } else
+        {
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+        }
+       
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 
 }
