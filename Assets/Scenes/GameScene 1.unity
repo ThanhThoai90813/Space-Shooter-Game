@@ -619,7 +619,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 11.7
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1030,11 +1030,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1679817424175147711, guid: ed9ebb69cc9187449991352faec67948, type: 3}
-  starPrefab: {fileID: 3212195193491438813, guid: cbc5d7226517a0944b6d30ef2983568a, type: 3}
   minInstantiateValue: -6
   maxInstantiateValue: 7
   enemyDestroyTime: 3.5
-  starDestroyTime: 10
   explosion: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
   muzzleFlash: {fileID: 100002, guid: 565cdc2ed7b030a41accd8f00ae59a50, type: 3}
   startMenu: {fileID: 1455116832}

@@ -1,0 +1,27 @@
+using UnityEngine;
+
+public class StarController : MonoBehaviour
+{
+    public float fallSpeed = 2f; // Tốc độ rơi của Star
+    public GameObject sparkleEffect; // Hiệu ứng lấp lánh
+
+    void Update()
+    {
+        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime); // Di chuyển xuống
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Star chạm vào Player!");
+
+            if (sparkleEffect != null)
+            {
+                Instantiate(sparkleEffect, transform.position, Quaternion.identity);
+            }
+
+            Destroy(gameObject);
+        }
+    }
+}
