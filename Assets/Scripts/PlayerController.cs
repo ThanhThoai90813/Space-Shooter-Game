@@ -55,6 +55,7 @@ public class PlayerController : MonoBehaviour
             Destroy(gm, 2f);
             Destroy(this.gameObject);
             //game over screen will appear here
+            GameManager.instance.GameOver();
         }
     }
 
