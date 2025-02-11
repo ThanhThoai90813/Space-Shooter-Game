@@ -12,16 +12,22 @@ public class StarController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Star chạm vào Player!");
+		if (other.CompareTag("Player"))
+		{
+			Debug.Log("Star chạm vào Player!");
 
-            if (sparkleEffect != null)
-            {
-                Instantiate(sparkleEffect, transform.position, Quaternion.identity);
-            }
+			if (sparkleEffect != null)
+			{
+				Instantiate(sparkleEffect, transform.position, Quaternion.identity);
+			}
 
-            Destroy(gameObject);
-        }
-    }
+			PointBar pointBar = FindObjectOfType<PointBar>();
+			if (pointBar != null)
+			{
+				pointBar.IncreasePoint(1);
+			}
+
+			Destroy(gameObject);
+		}
+	}
 }

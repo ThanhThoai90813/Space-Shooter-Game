@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject explosion;
     public GameObject muzzleFlash;
 
-    private void Awake()
+	private void Awake()
     {
         instance = this;
     }
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         GameObject star = Instantiate(starPrefab, starPos, Quaternion.identity);
         Destroy(star, starDestroyTime);
     }
-    public void GameOver()
+	public void GameOver()
     {
         SceneManager.LoadScene("MenuScene"); // Trở về menu khi game over
     }
