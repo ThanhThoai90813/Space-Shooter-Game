@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public float speed;
+    public float fallSpeed=2f;
 
     void Update()
     {
-       transform.Translate(Vector3.up*speed*Time.deltaTime);     
+       transform.Translate(Vector3.up*fallSpeed*Time.deltaTime);     
     }
 
 
