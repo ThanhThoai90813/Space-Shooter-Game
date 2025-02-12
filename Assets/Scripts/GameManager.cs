@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,10 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject explosion;
     public GameObject muzzleFlash;
 
-    [Header("Panels")]
-    public GameObject startMenu;
-    public GameObject pauseMenu;
-
+    [Header("Enemy Speed Settings")]
+    public float enemyFallSpeed = 2f; // Tốc độ rơi ban đầu
+    public float speedIncreasePerPoint = 0.2f; // Mỗi điểm tăng thêm tốc độ bao nhiêu
 
     private void Awake()
     {
@@ -26,60 +26,36 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        startMenu.SetActive(true);
-        pauseMenu.SetActive(false);
-        Time.timeScale = 0f;
         InvokeRepeating("InstantiateEnemy", 1f, 2f);
-        InvokeRepeating("InstantiateStar", 1f, 3f); // Star xuất hiện mỗi 3 giây
-
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame(true);
-        }
+        InvokeRepeating("InstantiateStar", 1f, 3f);
     }
 
     void InstantiateEnemy()
     {
-        Vector3 enemypos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 6f);
+        Vector3 enemypos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 10f);
         GameObject enemy = Instantiate(enemyPrefab, enemypos, Quaternion.Euler(0f,0f,180f));
+        // Gán tốc độ mới cho enemy
+        EnemyController enemyScript = enemy.GetComponent<EnemyController>();
+        if (enemyScript != null)
+        {
+            enemyScript.fallSpeed = enemyFallSpeed;
+        }
         Destroy(enemy, enemyDestroyTime);
+    }
+    public void IncreaseSpeed()
+    {
+        enemyFallSpeed += speedIncreasePerPoint;
     }
 
     void InstantiateStar() 
     {
-        Vector3 starPos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 6f);
+        Vector3 starPos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 10f);
         GameObject star = Instantiate(starPrefab, starPos, Quaternion.identity);
         Destroy(star, starDestroyTime);
     }
-
-
-    public void StartButtion()
+	public void GameOver()
     {
-        startMenu.SetActive(false);
-        Time.timeScale = 1f;
-    }
-
-    public void PauseGame(bool isPaused)
-    {
-        if (isPaused == true)
-        {
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-        } else
-        {
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
-        }
-       
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
+        SceneManager.LoadScene("MenuScene"); // Trở về menu khi game over
     }
 
 }
