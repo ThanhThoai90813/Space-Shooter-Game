@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     public float speedIncreasePerPoint = 0.2f; // Mỗi điểm tăng thêm tốc độ bao nhiêu
 
     public GameObject GameOverScreen;
+    public TMP_Text gameOverPointText;
+    private int playerScore = 0;
 
     private void Awake()
     {
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1f;
         InvokeRepeating("InstantiateEnemy", 1f, 2f);
         InvokeRepeating("InstantiateStar", 1f, 3f);
     }
@@ -49,6 +53,11 @@ public class GameManager : MonoBehaviour
         enemyFallSpeed += speedIncreasePerPoint;
     }
 
+    public void IncreaseScore(int amount)
+    {
+        playerScore += amount;
+    }
+
     void InstantiateStar() 
     {
         Vector3 starPos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 10f);
@@ -59,6 +68,10 @@ public class GameManager : MonoBehaviour
     {
         //SceneManager.LoadScene("MenuScene"); // Trở về menu khi game over
         GameOverScreen.SetActive(true);
+        if(GameOverScreen != null)
+        {
+            gameOverPointText.text = "Score: " +playerScore.ToString();
+        }
         Time.timeScale = 0f;
     }
 
