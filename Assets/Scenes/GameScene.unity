@@ -1718,8 +1718,8 @@ MonoBehaviour:
   starDestroyTime: 10
   explosion: {fileID: 100002, guid: cafecd3fc3b761c45bb1553f35cf5c96, type: 3}
   muzzleFlash: {fileID: 100002, guid: 565cdc2ed7b030a41accd8f00ae59a50, type: 3}
-  enemyFallSpeed: 2
-  speedIncreasePerPoint: 0.1
+  enemyFallSpeed: 3
+  speedIncreasePerPoint: 0.2
 --- !u!4 &718241496
 Transform:
   m_ObjectHideFlags: 0
@@ -1955,7 +1955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868ec7b4c782a05478eb91a4b170fb1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 3
   resetPosition: -10
   startPosition: 10
   backgroundSprites:
@@ -1964,7 +1964,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e9e9f9ef6000a0d449fe5228d5ba45a9, type: 3}
   - {fileID: 21300000, guid: 1a66969665b53d447bf2bd675b3ad9da, type: 3}
   - {fileID: 21300000, guid: 6353384fe04923e42ab15bd2b0bf3cb5, type: 3}
-  changeDelay: 10
+  changeDelay: 20
 --- !u!1 &1128284307
 GameObject:
   m_ObjectHideFlags: 0
