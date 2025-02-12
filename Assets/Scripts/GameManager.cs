@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public float enemyFallSpeed = 2f; // Tốc độ rơi ban đầu
     public float speedIncreasePerPoint = 0.2f; // Mỗi điểm tăng thêm tốc độ bao nhiêu
 
+    public GameObject GameOverScreen;
+
     private void Awake()
     {
         instance = this;
@@ -55,7 +57,9 @@ public class GameManager : MonoBehaviour
     }
 	public void GameOver()
     {
-        SceneManager.LoadScene("MenuScene"); // Trở về menu khi game over
+        //SceneManager.LoadScene("MenuScene"); // Trở về menu khi game over
+        GameOverScreen.SetActive(true);
+        Time.timeScale = 0f;
     }
 
 }
