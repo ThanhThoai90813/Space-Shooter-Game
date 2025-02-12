@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     {
         Vector3 enemypos = new Vector3(Random.Range(minInstantiateValue, maxInstantiateValue), 10f);
         GameObject enemy = Instantiate(enemyPrefab, enemypos, Quaternion.Euler(0f,0f,180f));
+       
         // Gán tốc độ mới cho enemy
         EnemyController enemyScript = enemy.GetComponent<EnemyController>();
         if (enemyScript != null)
@@ -48,6 +49,7 @@ public class GameManager : MonoBehaviour
         }
         Destroy(enemy, enemyDestroyTime);
     }
+
     public void IncreaseSpeed()
     {
         enemyFallSpeed += speedIncreasePerPoint;
