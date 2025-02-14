@@ -18,7 +18,7 @@ public class EnemyController : MonoBehaviour
         }
 
         //random kích thước
-        float randomSize = Random.Range(0.5f, 1.5f);
+        float randomSize = Random.Range(0.9f, 2f);
         transform.localScale = new Vector3(randomSize, randomSize, 1);
     }
 

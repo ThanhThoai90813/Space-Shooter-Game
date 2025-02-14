@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject GameOverScreen;
     public TMP_Text gameOverPointText;
+    public ScrollingRandomBackground scrollingBackground;
     private int playerScore = 0;
 
     private void Awake()
@@ -53,6 +54,11 @@ public class GameManager : MonoBehaviour
     public void IncreaseSpeed()
     {
         enemyFallSpeed += speedIncreasePerPoint;
+
+         if (scrollingBackground != null)
+        {
+            scrollingBackground.IncreaseSpeed(playerScore);
+        }
     }
 
     public void IncreaseScore(int amount)
