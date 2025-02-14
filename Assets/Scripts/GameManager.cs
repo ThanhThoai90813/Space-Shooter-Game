@@ -11,8 +11,9 @@ public class GameManager : MonoBehaviour
     public float maxInstantiateValue;
     public float enemyDestroyTime = 10f;
     public float starDestroyTime = 10f;
+	public AudioSource deathSound;
 
-    [Header("Particle Effects")]
+	[Header("Particle Effects")]
     public GameObject explosion;
     public GameObject muzzleFlash;
 
