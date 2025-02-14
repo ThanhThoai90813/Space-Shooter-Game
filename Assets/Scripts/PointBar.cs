@@ -9,6 +9,8 @@ public class PointBar : MonoBehaviour
 	{
 		point += amount;
 		UpdatePointText();
+
+		GameManager.instance.IncreaseScore(amount);
         GameManager.instance.IncreaseSpeed();
     }
 

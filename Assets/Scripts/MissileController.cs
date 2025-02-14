@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class MissileController : MonoBehaviour
 {
-    public float missileSpeed = 100f;
+    public float missileSpeed = 5f;
 
     // Update is called once per frame
     void Update()

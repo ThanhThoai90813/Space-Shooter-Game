@@ -2,28 +2,30 @@ using UnityEngine;
 
 public class ScrollingRandomBackground : MonoBehaviour
 {
-    public float speed = 2f; // Tốc độ di chuyển
-    public float resetPosition = -10f; // Vị trí reset
-    public float startPosition = 10f; // Vị trí bắt đầu lại
-    public Sprite[] backgroundSprites; // Danh sách background
+    public float baseSpeed = 2f;  
+    private float currentSpeed;   
+    public float speedIncreasePerPoint = 0.1f; 
+    public float resetPosition = -10f;
+    public float startPosition = 10f;
+
+    public Sprite[] backgroundSprites; 
     private SpriteRenderer spriteRenderer;
 
-    public float changeDelay = 5f; // Thời gian chờ trước khi đổi background
-    private float lastChangeTime; // Thời gian lần cuối đổi background
+    public float changeDelay = 5f; 
+    private float lastChangeTime; 
 
-    void Start()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        ChangeBackground(); // Đổi background khi bắt đầu game
-        lastChangeTime = Time.time; // Lưu thời điểm bắt đầu
+        currentSpeed = baseSpeed;  
+        ChangeBackground(); 
+        lastChangeTime = Time.time; 
     }
 
-    void Update()
+    private void Update()
     {
-        // Di chuyển background xuống
-        transform.position += Vector3.down * speed * Time.deltaTime;
+        transform.position += Vector3.down * currentSpeed * Time.deltaTime;
 
-        // Nếu background xuống quá resetPosition, di chuyển lại vị trí ban đầu
         if (transform.position.y <= resetPosition)
         {
             transform.position = new Vector3(transform.position.x, startPosition, transform.position.z);
@@ -35,6 +37,11 @@ public class ScrollingRandomBackground : MonoBehaviour
                 lastChangeTime = Time.time; // Cập nhật lại thời điểm đổi background
             }
         }
+    }
+
+    public void IncreaseSpeed(int score)
+    {
+        currentSpeed = baseSpeed + (score * speedIncreasePerPoint);
     }
 
     void ChangeBackground()
