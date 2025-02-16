@@ -30,4 +30,13 @@ public class StarController : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
+
+	void OnDestroy()
+	{
+		// Phát âm thanh nổ khi enemy bị hủy
+		if (GameManager.instance.deathSound != null)
+		{
+			AudioSource.PlayClipAtPoint(GameManager.instance.starPickupSound.clip, transform.position);
+		}
+	}
 }

@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public float maxInstantiateValue;
     public float enemyDestroyTime = 10f;
     public float starDestroyTime = 10f;
-	public AudioSource deathSound;
+	public AudioSource deathSound, starPickupSound, gameOverSound;
 
 	[Header("Particle Effects")]
     public GameObject explosion;
@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
             gameOverPointText.text = "Score: " +playerScore.ToString();
         }
         Time.timeScale = 0f;
+        gameOverSound.Play();
     }
 
 }
