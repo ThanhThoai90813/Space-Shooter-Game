@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
         GameOverScreen.SetActive(true);
         if(GameOverScreen != null)
         {
-            gameOverPointText.text = "Score: " + playerScore.ToString();
+            gameOverPointText.text = "Score: " +playerScore.ToString();
         }
         Time.timeScale = 0f;
         gameOverSound.Play();

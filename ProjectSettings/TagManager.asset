@@ -5,10 +5,6 @@ TagManager:
   serializedVersion: 3
   tags:
   - Enemy
-  - Projectile
-  - ScoreText
-  - HighScoreText
-  - Panel
   layers:
   - Default
   - TransparentFX
