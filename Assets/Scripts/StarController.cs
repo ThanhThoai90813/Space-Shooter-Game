@@ -21,7 +21,7 @@ public class StarController : MonoBehaviour
 				Instantiate(sparkleEffect, transform.position, Quaternion.identity);
 			}
 
-			PointBar pointBar = FindObjectOfType<PointBar>();
+			PointBar pointBar = FindFirstObjectByType<PointBar>();
 			if (pointBar != null)
 			{
 				pointBar.IncreasePoint(1);
