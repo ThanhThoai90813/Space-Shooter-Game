@@ -1,3 +1,4 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float destroyTimes =5f;
     public Animator animator;
     public Transform muzzleSpawnPosition;
+    public AudioSource lazerSound, deathSound;
 
     private void Start()
     {
@@ -52,20 +54,26 @@ public class PlayerController : MonoBehaviour
     {
         GameObject muzzle = Instantiate(GameManager.instance.muzzleFlash, muzzleSpawnPosition);
         muzzle.transform.SetParent(null);
-        Destroy(muzzle, destroyTimes);
+		lazerSound.Play();
+		Destroy(muzzle, destroyTimes);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            GameObject gm = Instantiate(GameManager.instance.explosion, transform
-               .position, transform.rotation);
-            Destroy(gm, 2f);
-            Destroy(this.gameObject);
-            //game over screen will appear here
-            GameManager.instance.GameOver();
-        }
-    }
+	IEnumerator PlayDeathSoundAndDestroy()
+	{
+		deathSound.Play();
+		yield return new WaitForSeconds(deathSound.clip.length);
+		Destroy(this.gameObject);
+	}
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (collision.gameObject.tag == "Enemy")
+		{
+			GameObject gm = Instantiate(GameManager.instance.explosion, transform.position, transform.rotation);
+			StartCoroutine(PlayDeathSoundAndDestroy());
+			GameManager.instance.GameOver();
+		}
+	}
+
 
 }

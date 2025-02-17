@@ -27,5 +27,12 @@ public class EnemyController : MonoBehaviour
        transform.Translate(Vector3.up*fallSpeed*Time.deltaTime);     
     }
 
-
+	void OnDestroy()
+	{
+		// Phát âm thanh nổ khi enemy bị hủy
+		if (GameManager.instance.deathSound != null)
+		{
+			AudioSource.PlayClipAtPoint(GameManager.instance.deathSound.clip, transform.position);
+		}
+	}
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,8 +12,9 @@ public class GameManager : MonoBehaviour
     public float maxInstantiateValue;
     public float enemyDestroyTime = 10f;
     public float starDestroyTime = 10f;
+	public AudioSource deathSound, starPickupSound, gameOverSound;
 
-    [Header("Particle Effects")]
+	[Header("Particle Effects")]
     public GameObject explosion;
     public GameObject muzzleFlash;
 
@@ -80,7 +82,32 @@ public class GameManager : MonoBehaviour
         {
             gameOverPointText.text = "Score: " +playerScore.ToString();
         }
+        SaveHighScore(playerScore);
         Time.timeScale = 0f;
+        gameOverSound.Play();
+
+    }
+    public void SaveHighScore(int score)
+    {
+        List<int> highScores = new List<int>();
+
+        // Lấy danh sách điểm cũ
+        for (int i = 0; i < 10; i++)
+        {
+            highScores.Add(PlayerPrefs.GetInt("HighScore" + i, 0));
+        }
+
+        // Thêm điểm mới vào danh sách
+        highScores.Add(score);
+        highScores.Sort((a, b) => b.CompareTo(a)); // Sắp xếp giảm dần
+
+        // Chỉ lưu 10 điểm cao nhất
+        for (int i = 0; i < 10; i++)
+        {
+            PlayerPrefs.SetInt("HighScore" + i, highScores[i]);
+        }
+
+        PlayerPrefs.Save();
     }
 
 }
