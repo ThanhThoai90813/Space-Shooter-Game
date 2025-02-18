@@ -14,8 +14,6 @@ public class StarController : MonoBehaviour
     {
 		if (other.CompareTag("Player"))
 		{
-			Debug.Log("Star chạm vào Player!");
-
 			if (sparkleEffect != null)
 			{
 				Instantiate(sparkleEffect, transform.position, Quaternion.identity);

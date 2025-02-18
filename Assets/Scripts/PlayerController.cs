@@ -34,7 +34,29 @@ public class PlayerController : MonoBehaviour
 
         Vector3 movement = new Vector3(xPos, yPos, 0) * speed * Time.deltaTime;
         transform.Translate(movement);
+        LimitPlayerPosition();
     }
+
+    void LimitPlayerPosition()
+    {
+        // Lấy Camera chính
+        Camera cam = Camera.main;
+
+        // Giới hạn góc trái dưới và góc phải trên trong thế giới (World Space)
+        Vector3 minBounds = cam.ViewportToWorldPoint(new Vector3(0, 0, 0)); // Góc trái dưới
+        Vector3 maxBounds = cam.ViewportToWorldPoint(new Vector3(1, 1, 0)); // Góc phải trên
+
+        // Lấy vị trí hiện tại của Player
+        Vector3 clampedPosition = transform.position;
+
+        // Giới hạn theo biên của camera
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minBounds.x, maxBounds.x);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minBounds.y, maxBounds.y);
+
+        // Cập nhật vị trí mới
+        transform.position = clampedPosition;
+    }
+
 
     void PlayerShoot()
     {
